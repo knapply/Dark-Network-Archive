@@ -1,0 +1,70 @@
+---
+title: "Project Siren"
+publishDate: "`r Sys.Date()`"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+tags: 
+- gangs
+- criminal network
+summary: "Morselli's Project Siren data set encompasses actors embedded in an illicit network for the stolen-vehicle exportation (or ringing) operations. The data was obtained within a larger investigative setting between 1993 and 2005 under Project CERVO. As Morselli (2009) points out 'The main objective of this task force was to monitor and control the exportation of stolen luxury vehicles from the Port of Montreal. Cooperation between law-enforcement and border/insurance agencies was the unique feature, with the latter supplying documents from maritime shipping companies that contained information on suspect cargo and the identities of individuals or enterprises involved in their trasportation.'"
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+options(warn = 2) # FAIL ON ANY WARNINGS
+
+`%>%` <- magrittr::`%>%`
+```
+
+```{r}
+proto_net <- COREnets::get_data("siren")
+g <- COREnets::core_as_igraph(proto_net)
+```
+
+
+# Introduction
+
+```{r, results='asis'}
+cat(proto_net$reference$description)
+```
+
+# Sociogram
+
+
+```{r, out.width='100%', fig.height=9}
+g %>% 
+  visNetwork::visIgraph() %>% 
+  visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>% 
+  visNetwork::visNodes(
+    color = list(highlight.border = "black"), 
+    shadow = list(enabled = TRUE, size = 5)
+  ) %>% 
+  visNetwork::visOptions(
+    highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE),
+    # selectedBy = list(
+    #   variable = "group",
+    #   style = "font-size: 15px"
+    # ),
+    nodesIdSelection = list(
+      enabled = TRUE,
+      style = "font-size: 15px"
+    )
+  ) %>% 
+  visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>% 
+  visNetwork::visExport(name = proto_net$reference$name)
+```
+
+
+
+
+
+
+
+

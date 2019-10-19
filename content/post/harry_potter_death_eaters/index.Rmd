@@ -1,0 +1,72 @@
+---
+title: "Death Eaters"
+publishDate: "`r Sys.Date()`"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+tags: 
+- trust
+- strong ties
+- centrality
+- network topography
+summary: "Network approaches for analyzing narratives and other texts are being used with increasing frequency. They are seen as capable of identifying key actors and events, highlighting semantic structures, and uncovering underlying meanings and mental models. Numerous network approaches exist. In this paper, the authors adopt an approach where the characters in the story are nodes and the ties linking indicate some type of interaction between them. The authors explore the effects of tie strength between members of two “dark networks” found in the Harry Potter novels—Dumbledore’s Army and Voldemort’s Death Eaters. Drawing on centrality measures, this analysis finds that a handful of secondary characters play roles as important, or almost as important, as Harry Potter and Lord Voldemort. Moreover, a comparison of the topographical structure of the two networks suggests that if the fictional world of Harry Potter remotely mirrors the real one, Dumbledore’s Army is built to withstand stress and uncertainty, while the Death Eaters is not, suggesting that that J. K. Rowling has an intuitive understanding of a key difference between networks built on trust and those built on fear. The former live to fight another day; the latter do not."
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+options(warn = 2) # FAIL ON ANY WARNINGS
+
+`%>%` <- magrittr::`%>%`
+```
+
+```{r}
+proto_net <- COREnets::get_data("harry_potter_death_eaters")
+g <- COREnets::core_as_igraph(proto_net)
+```
+
+
+# Introduction
+
+```{r, results='asis'}
+cat(proto_net$reference$description)
+```
+
+# Sociogram
+
+
+```{r, out.width='100%', fig.height=9}
+g %>% 
+  visNetwork::visIgraph() %>% 
+  visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>% 
+  visNetwork::visNodes(
+    color = list(highlight.border = "black"), 
+    shadow = list(enabled = TRUE, size = 5)
+  ) %>% 
+  visNetwork::visOptions(
+    highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE),
+    # selectedBy = list(
+    #   variable = "group",
+    #   style = "font-size: 15px"
+    # ),
+    nodesIdSelection = list(
+      enabled = TRUE,
+      style = "font-size: 15px"
+    )
+  ) %>% 
+  visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>% 
+  visNetwork::visExport(name = proto_net$reference$name)
+```
+
+
+
+
+
+
+
+

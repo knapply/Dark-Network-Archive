@@ -1,0 +1,73 @@
+---
+title: "Anabaptist Leadership Network"
+publishDate: "`r Sys.Date()`"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+tags: 
+- Anabaptists
+- religious violence
+- charismatic leadership
+- isolation
+- apocalypticism
+summary: "Gang to gang network data obtained from the Montreal Police's central intelligence base and used to reconstruct the organization of drug-distribution operations in Montreal North. The network data was made available by Manchester and it includes organization to organization undirected ties (although th orignial network is directed)."
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+options(warn = 2) # FAIL ON ANY WARNINGS
+
+`%>%` <- magrittr::`%>%`
+```
+
+```{r}
+proto_net <- COREnets::get_data("anabaptists")
+g <- COREnets::core_as_igraph(proto_net)
+```
+
+
+# Introduction
+
+```{r, results='asis'}
+cat(proto_net$reference$description)
+```
+
+# Sociogram
+
+
+```{r, out.width='100%', fig.height=9}
+g %>% 
+  visNetwork::visIgraph() %>% 
+  visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>% 
+  visNetwork::visNodes(
+    color = list(highlight.border = "black"), 
+    shadow = list(enabled = TRUE, size = 5)
+  ) %>% 
+  visNetwork::visOptions(
+    highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE),
+    # selectedBy = list(
+    #   variable = "group",
+    #   style = "font-size: 15px"
+    # ),
+    nodesIdSelection = list(
+      enabled = TRUE,
+      style = "font-size: 15px"
+    )
+  ) %>% 
+  visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>% 
+  visNetwork::visExport(name = proto_net$reference$name)
+```
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+---
+title: "Cocaine Smuggling Operation MAMBO"
+publishDate: "`r Sys.Date()`"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+tags: 
+- drug smuggling
+- crime
+summary: "These data refer to one of four illicit drug networks operating in Spain between 2007 and 2009. Operation MAMBO (n=22) began in 2006 and involved Colombian citizens that were introducing 50 kg of cocaine to be adulterated and distributed in Madrid (Spain). Ultimately, the group was involved in smuggling cocaine from Colombia through Brazil and Uruguay to be distributed in Spain. This is a typical Spanish middle cocaine group acting as wholesale supplier between a South American importer group and retailers in Madrid."
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+options(warn = 2) # FAIL ON ANY WARNINGS
+
+`%>%` <- magrittr::`%>%`
+```
+
+```{r}
+proto_net <- COREnets::get_data("cocaine_smuggling_mambo")
+g <- COREnets::core_as_igraph(proto_net)
+```
+
+
+# Introduction
+
+```{r, results='asis'}
+cat(proto_net$reference$description)
+```
+
+# Sociogram
+
+
+```{r, out.width='100%', fig.height=9}
+g %>% 
+  visNetwork::visIgraph() %>% 
+  visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>% 
+  visNetwork::visNodes(
+    color = list(highlight.border = "black"), 
+    shadow = list(enabled = TRUE, size = 5)
+  ) %>% 
+  visNetwork::visOptions(
+    highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE),
+    # selectedBy = list(
+    #   variable = "group",
+    #   style = "font-size: 15px"
+    # ),
+    nodesIdSelection = list(
+      enabled = TRUE,
+      style = "font-size: 15px"
+    )
+  ) %>% 
+  visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>% 
+  visNetwork::visExport(name = proto_net$reference$name)
+```
+
+
+
+
+
+
+
+

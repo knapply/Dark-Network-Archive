@@ -1,0 +1,70 @@
+---
+title: "Cocaine Smuggling Operation JUANES"
+publishDate: "`r Sys.Date()`"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+tags: 
+- drug smuggling
+- crime
+summary: "These data refer to one of four illicit drug networks operating in Spain between 2007 and 2009. Operation JUANES (n=51) took place in 2009 when the police detected a group involved in the smuggling of cocaine from Mexico to be distributed in Madrid, Spain. In this case, the group operated close to ooperation with another organization that was laundering the illegal income from drug distribution from this and other groups. The cocaine traffickers earned an estimated EUR 60 million."
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+options(warn = 2) # FAIL ON ANY WARNINGS
+
+`%>%` <- magrittr::`%>%`
+```
+
+```{r}
+proto_net <- COREnets::get_data("cocaine_smuggling_juanes")
+g <- COREnets::core_as_igraph(proto_net)
+```
+
+
+# Introduction
+
+```{r, results='asis'}
+cat(proto_net$reference$description)
+```
+
+# Sociogram
+
+
+```{r, out.width='100%', fig.height=9}
+g %>% 
+  visNetwork::visIgraph() %>% 
+  visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>% 
+  visNetwork::visNodes(
+    color = list(highlight.border = "black"), 
+    shadow = list(enabled = TRUE, size = 5)
+  ) %>% 
+  visNetwork::visOptions(
+    highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE),
+    # selectedBy = list(
+    #   variable = "group",
+    #   style = "font-size: 15px"
+    # ),
+    nodesIdSelection = list(
+      enabled = TRUE,
+      style = "font-size: 15px"
+    )
+  ) %>% 
+  visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>% 
+  visNetwork::visExport(name = proto_net$reference$name)
+```
+
+
+
+
+
+
+
+

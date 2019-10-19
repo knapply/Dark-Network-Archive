@@ -1,0 +1,73 @@
+---
+title: "Drugnet"
+publishDate: "`r Sys.Date()`"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+tags: 
+- drug users
+- drug-use settings
+- African Americans
+- Puerto Ricans
+- HIV
+summary: "Social network research increasingly expands our understanding of the social environment of drug users' health risks, particularly those associated with the transmission of HIV, hepatitis, and other sexually transmitted and bloodborne infectious diseases. Our study of the networks of drug users who use high-risk sites, where people gather to inject drugs and smoke crack cocaine, is designed to explore the relationships and interactions of drug users in settings in which potential risk occurs, and to assess the opportunity to create prevention linkages. This paper describes the ego-network characteristics and macro-network linkages among a sample of 293 drug users recruited through street outreach and personal drug-use network referral in Hartford, Connecticut. Characteristics of the largest connected component of the network are also described and analyzed. We discuss uses of network analyses as well as implications of network connections for peer-led AIDS prevention intervention conducted in high-risk drug-use sites."
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+options(warn = 2) # FAIL ON ANY WARNINGS
+
+`%>%` <- magrittr::`%>%`
+```
+
+```{r}
+proto_net <- COREnets::get_data("drugnet")
+g <- COREnets::core_as_igraph(proto_net)
+```
+
+
+# Introduction
+
+```{r, results='asis'}
+cat(proto_net$reference$description)
+```
+
+# Sociogram
+
+
+```{r, out.width='100%', fig.height=9}
+g %>% 
+  visNetwork::visIgraph() %>% 
+  visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>% 
+  visNetwork::visNodes(
+    color = list(highlight.border = "black"), 
+    shadow = list(enabled = TRUE, size = 5)
+  ) %>% 
+  visNetwork::visOptions(
+    highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE),
+    # selectedBy = list(
+    #   variable = "group",
+    #   style = "font-size: 15px"
+    # ),
+    nodesIdSelection = list(
+      enabled = TRUE,
+      style = "font-size: 15px"
+    )
+  ) %>% 
+  visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>% 
+  visNetwork::visExport(name = proto_net$reference$name)
+```
+
+
+
+
+
+
+
+
