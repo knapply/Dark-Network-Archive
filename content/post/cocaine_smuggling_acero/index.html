@@ -1,6 +1,6 @@
 ---
 title: "Cocaine Smuggling Operation ACERO"
-publishDate: "2019-10-18"
+publishDate: "2019-10-21"
 output: 
   blogdown::html_page:
     toc: true
@@ -22,11 +22,22 @@ summary: "These data refer to one of four illicit drug networks operating in Spa
 <script src="/rmarkdown-libs/canvas-toBlob/canvas-toBlob.js"></script>
 <script src="/rmarkdown-libs/html2canvas/html2canvas.js"></script>
 <script src="/rmarkdown-libs/jspdf/jspdf.debug.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
 
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#code-book">Code Book</a></li>
 <li><a href="#sociogram">Sociogram</a></li>
+<li><a href="#get-the-data">Get the Data</a><ul>
+<li><a href="#tables">Tables</a><ul>
+<li><a href="#nodes">Nodes</a></li>
+<li><a href="#edges">Edges</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#citation">Citation</a></li>
 </ul>
 </div>
 
@@ -34,8 +45,61 @@ summary: "These data refer to one of four illicit drug networks operating in Spa
 <h1>Introduction</h1>
 <p>This dataset is one of four and it refers to a group involved in cocaine trafficking in Spain. The data was retrieved from UCINET’s site and divided into individual networks as these existed at different points in time. The information is listed as coming from police wiretapping and meetings registered by police investigations of the dark networks in a period between 2007 and 2009.</p>
 </div>
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+<p>These data refer to one of four illicit drug networks operating in Spain between 2007 and 2009. Operation ACERO (n=11) began in 2007 and involved a small family-based group. The group was composed mainly of members of a same family and was led by a female. They distributed cocaine in Madrid (Spain) that was provided to them by other groups based in a northwest region of the country, one of the most active areas in the provision of cocaine from the countries of origin. The group also had their own procedures to launder money.</p>
+</div>
+<div id="code-book" class="section level1">
+<h1>Code Book</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">edge_class</th>
+<th align="left">is_bimodal</th>
+<th align="left">is_directed</th>
+<th align="left">is_dynamic</th>
+<th align="left">is_weighted</th>
+<th align="left">definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">person-to-person</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Undirected valued relationship for actors, mainly of the same family.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="sociogram" class="section level1">
 <h1>Sociogram</h1>
 <div id="htmlwidget-1" style="width:100%;height:864px;" class="visNetwork html-widget"></div>
 <script type="application/json" data-for="htmlwidget-1">{"x":{"nodes":{"id":["AAR","AL","AN","ASB","CEPO","EEG","H","JA","JCR","JCT","JFS","JLAR","JMMM","JOR","MMM","NA","R","RRS","SAR","DA","JGG","PA","VA","HO","T"],"node_class":["person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person"],"label":["AAR","AL","AN","ASB","CEPO","EEG","H","JA","JCR","JCT","JFS","JLAR","JMMM","JOR","MMM","NA","R","RRS","SAR","DA","JGG","PA","VA","HO","T"],"x":[-0.460959860957942,-0.272980862956981,1,0.822131599470211,0.272868300251096,0.600465932248295,0.10464403380371,-0.484192198564937,0.160490890621897,-0.317450670923774,0.543302383641244,-0.124661137782559,0.167925108749548,-0.493005703698844,0.379613336148078,-0.0526014264591871,-0.648191363080763,-0.601027832876721,-0.168753624448893,-0.900724146564582,-0.692162499039498,-1,-0.0906406181411838,0.565465853751084,-0.28557534034472],"y":[-0.118403878957985,0.879298882415508,-0.551764990360575,0.609953835815707,-0.0185653700005401,-0.252574528175333,-0.331225337285514,0.386670194617766,0.467230759937277,-1,1,-0.0485880501218502,0.182717905006638,0.799526122540663,0.47143659167488,0.864145790417435,0.358558269493051,0.166671329946198,0.31010573142164,-0.374644656043187,-0.622554608500498,-0.0310615659542652,-0.494568285627078,-0.485996194771891,-0.368679443468873]},"edges":{"from":["AAR","AAR","AAR","AAR","AAR","AAR","AAR","AAR","AAR","AAR","AL","AN","ASB","CEPO","CEPO","CEPO","CEPO","CEPO","CEPO","CEPO","CEPO","CEPO","EEG","H","JA","JCR","JCR","JCT","JFS","JLAR","JMMM","JOR","MMM","NA","R","RRS","SAR"],"to":["DA","H","JA","JGG","JLAR","PA","R","RRS","SAR","VA","SAR","EEG","MMM","EEG","H","HO","JCR","JLAR","JMMM","MMM","SAR","VA","H","JMMM","SAR","MMM","SAR","T","MMM","SAR","SAR","SAR","SAR","SAR","SAR","SAR","T"],"from_class":["person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person"],"to_class":["person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person"],"edge_class":["person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false,"color":{"highlight.border":"black"},"shadow":{"enabled":true,"size":5}},"manipulation":{"enabled":false},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"hover":true,"keyboard":true,"navigationButtons":true}},"groups":null,"width":null,"height":null,"idselection":{"enabled":true,"style":"font-size: 15px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)"},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","igraphlayout":{"type":"square"},"highlight":{"enabled":true,"hoverNearest":true,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","export":{"type":"png","css":"float:right;-webkit-border-radius: 10;\n                  -moz-border-radius: 10;\n                  border-radius: 10px;\n                  font-family: Arial;\n                  color: #ffffff;\n                  font-size: 12px;\n                  background: #090a0a;\n                  padding: 4px 8px 4px 4px;\n                  text-decoration: none;","background":"#fff","name":"cocaine_smuggling_acero.png","label":"Export as png"}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="get-the-data" class="section level1">
+<h1>Get the Data</h1>
+<div id="tables" class="section level2">
+<h2>Tables</h2>
+<div id="nodes" class="section level3">
+<h3>Nodes</h3>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/cocaine_smuggling_acero/index_files/figure-html//widgets/widget_unnamed-chunk-6.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="edges" class="section level3">
+<h3>Edges</h3>
+<div id="htmlwidget-3" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/post/cocaine_smuggling_acero/index_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="citation" class="section level1">
+<h1>Citation</h1>
+<p>Jimenez-Salinas Framis A (2011). “llegal networks or criminal
+organizations: Power, roles and facilitators in four cocaine
+trafficking structures.” In <em>Illegal networks or criminal
+organizations: Power, roles and facilitators in four cocaine
+trafficking structures.</em>.</p>
 </div>

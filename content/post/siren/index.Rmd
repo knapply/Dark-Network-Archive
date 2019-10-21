@@ -10,7 +10,7 @@ editor_options:
 tags: 
 - gangs
 - criminal network
-summary: "Morselli's Project Siren data set encompasses actors embedded in an illicit network for the stolen-vehicle exportation (or ringing) operations. The data was obtained within a larger investigative setting between 1993 and 2005 under Project CERVO. As Morselli (2009) points out 'The main objective of this task force was to monitor and control the exportation of stolen luxury vehicles from the Port of Montreal. Cooperation between law-enforcement and border/insurance agencies was the unique feature, with the latter supplying documents from maritime shipping companies that contained information on suspect cargo and the identities of individuals or enterprises involved in their trasportation.'"
+summary: "Morselli's Project Siren data set encompasses actors embedded in an illicit network for the stolen-vehicle exportation (or ringing) operations. The data was obtained within a larger investigative setting between 1993 and 2005 under Project CERVO. As Morselli (2009) points out 'The main objective of this task force was to monitor and control the exportation of stolen luxury vehicles from the Port of Montreal. Cooperation between law-enforcement and border/insurance agencies was the unique feature, with the latter supplying documents from maritime shipping companies that contained information on suspect cargo and the identities of individuals or enterprises involved in their trasportation. The data presented here was reconstructed from Morselli's book by researchers and mainteners of the UCINET Software site (https://sites.google.com/site/ucinetsoftware). However, the author provides an in detail description of his data collection process on his 2000 book Inside Criminal Networks."
 ---
 
 
@@ -34,6 +34,20 @@ g <- COREnets::core_as_igraph(proto_net)
 ```{r, results='asis'}
 cat(proto_net$reference$description)
 ```
+
+# Abstract
+
+```{r, results='asis'}
+cat(proto_net$reference$abstract)
+```
+
+# Code Book
+
+
+```{r}
+knitr::kable(proto_net$reference$codebook)
+```
+
 
 # Sociogram
 
@@ -62,8 +76,66 @@ g %>%
 ```
 
 
+# Get the Data
+
+## Tables
+
+### Nodes
+
+```{r}
+proto_net$network$nodes_table %>% 
+  tibble::as_tibble() %>%
+  DT::datatable(
+    rownames = FALSE,
+    filter="top",
+    extensions = "Buttons",
+    options = list(
+      dom = "Bfrtip",
+      buttons = list(
+        "copy", "print",
+        list(extend = "csv", filename = glue::glue("{proto_net$network$nodes_table}_nodes")),
+        list(extend = "excel", filename = glue::glue("{proto_net$network$nodes_table}_nodes"))
+      ),
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  ) %>%
+  widgetframe::frameWidget(height = "auto")
+```
 
 
+### Edges
+
+
+```{r}
+proto_net$network$edges_table %>% 
+  tibble::as_tibble() %>%
+  dplyr::rename(source = from, target = to) %>%
+  DT::datatable(
+    rownames = FALSE,
+    filter="top",
+    extensions = "Buttons",
+    options = list(
+      dom = "Bfrtip",
+      buttons = list(
+        "copy", "print",
+        list(extend = "csv", filename = glue::glue("{proto_net$network$edge_table}_edges")),
+        list(extend = "excel", filename = glue::glue("{proto_net$network$edge_table}_edges"))
+      ),
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  ) %>%
+  widgetframe::frameWidget(height = "auto")
+```
+
+
+# Citation
+
+
+```{r, results='asis'}
+proto_net$reference$bibtex
+```
 
 
 

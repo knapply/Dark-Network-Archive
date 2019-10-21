@@ -33,6 +33,20 @@ g <- COREnets::core_as_igraph(proto_net)
 cat(proto_net$reference$description)
 ```
 
+# Abstract
+
+```{r, results='asis'}
+cat(proto_net$reference$abstract)
+```
+
+# Code Book
+
+
+```{r}
+knitr::kable(proto_net$reference$codebook)
+```
+
+
 # Sociogram
 
 
@@ -60,8 +74,66 @@ g %>%
 ```
 
 
+# Get the Data
+
+## Tables
+
+### Nodes
+
+```{r}
+proto_net$network$nodes_table %>% 
+  tibble::as_tibble() %>%
+  DT::datatable(
+    rownames = FALSE,
+    filter="top",
+    extensions = "Buttons",
+    options = list(
+      dom = "Bfrtip",
+      buttons = list(
+        "copy", "print",
+        list(extend = "csv", filename = glue::glue("{proto_net$network$nodes_table}_nodes")),
+        list(extend = "excel", filename = glue::glue("{proto_net$network$nodes_table}_nodes"))
+      ),
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  ) %>%
+  widgetframe::frameWidget(height = "auto")
+```
 
 
+### Edges
+
+
+```{r}
+proto_net$network$edges_table %>% 
+  tibble::as_tibble() %>%
+  dplyr::rename(source = from, target = to) %>%
+  DT::datatable(
+    rownames = FALSE,
+    filter="top",
+    extensions = "Buttons",
+    options = list(
+      dom = "Bfrtip",
+      buttons = list(
+        "copy", "print",
+        list(extend = "csv", filename = glue::glue("{proto_net$network$edge_table}_edges")),
+        list(extend = "excel", filename = glue::glue("{proto_net$network$edge_table}_edges"))
+      ),
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  ) %>%
+  widgetframe::frameWidget(height = "auto")
+```
+
+
+# Citation
+
+
+```{r, results='asis'}
+proto_net$reference$bibtex
+```
 
 
 

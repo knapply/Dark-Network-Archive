@@ -5,7 +5,7 @@
     <link>/tags/terrorism/</link>
       <atom:link href="/tags/terrorism/index.xml" rel="self" type="application/rss+xml" />
     <description>terrorism</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 21 Oct 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>terrorism</title>
@@ -15,7 +15,7 @@
     <item>
       <title>November17</title>
       <link>/post/november17/</link>
-      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
       <guid>/post/november17/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
@@ -27,11 +27,22 @@
 &lt;script src=&#34;/rmarkdown-libs/canvas-toBlob/canvas-toBlob.js&#34;&gt;&lt;/script&gt;
 &lt;script src=&#34;/rmarkdown-libs/html2canvas/html2canvas.js&#34;&gt;&lt;/script&gt;
 &lt;script src=&#34;/rmarkdown-libs/jspdf/jspdf.debug.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/pymjs/pym.v1.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/widgetframe-binding/widgetframe.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#abstract&#34;&gt;Abstract&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#code-book&#34;&gt;Code Book&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#sociogram&#34;&gt;Sociogram&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#get-the-data&#34;&gt;Get the Data&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#tables&#34;&gt;Tables&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#nodes&#34;&gt;Nodes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#edges&#34;&gt;Edges&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#citation&#34;&gt;Citation&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -39,10 +50,61 @@
 &lt;h1&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Using data observed from open source publications, the authors derived network data on the social network of the Greek terrorist group November17 (N17). The present data set represents a reconstruction of the data presented in the original paper, Inferring missing links in partially observed social network, put together by the UCINET team.&lt;/p&gt;
 &lt;/div&gt;
+&lt;div id=&#34;abstract&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Abstract&lt;/h1&gt;
+&lt;p&gt;The authors demostrate how social network topology can be inferred from following a limited observation of a large network. Essentially the issue is one of inferring the presence of links that are missed during a contrained data collection campaign on the network. It is particularly difficult to infer network structure for thos organizations that actively seek to remain covert and undetected. However, it is often very useful to know if two given individuals are likely to be connected even though limited surveillance efforts yield no evidence of a link. Specifically, the authors show how a statistical inference technique can be used to succesfully predict the existance of links that are missed during network sampling. The procedure is demostrated using data obtained from public source publications.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;code-book&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Code Book&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;edge_class&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;is_bimodal&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;is_directed&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;is_dynamic&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;is_weighted&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;definition&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;connection&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;FALSE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;FALSE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;FALSE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;FALSE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Relations indicate that open source reporting has demonstrated some connection between the two individuals at some point in the past.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
 &lt;div id=&#34;sociogram&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Sociogram&lt;/h1&gt;
 &lt;div id=&#34;htmlwidget-1&#34; style=&#34;width:100%;height:864px;&#34; class=&#34;visNetwork html-widget&#34;&gt;&lt;/div&gt;
 &lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-1&#34;&gt;{&#34;x&#34;:{&#34;nodes&#34;:{&#34;id&#34;:[&#34;Alexandros Giotopoulos&#34;,&#34;Anna&#34;,&#34;Christodoulos Xiros&#34;,&#34;Constantinos Karatsolis&#34;,&#34;Constantinos Telios&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dionysis Georgiadis&#34;,&#34;Elias Gaglias&#34;,&#34;Fotis&#34;,&#34;Iraklis Kostaris&#34;,&#34;Nikitas&#34;,&#34;Ojurk Hanuz&#34;,&#34;Patroclos Tselentis&#34;,&#34;Pavlos Serifis&#34;,&#34;Sardanopoulos&#34;,&#34;Savas Xiros&#34;,&#34;Sotirios Kondylis&#34;,&#34;Thomas Serifis&#34;,&#34;Vassilis Tzortzatos&#34;,&#34;Vassilis Xiros&#34;,&#34;Yiannis&#34;,&#34;Yiannis Skandalis&#34;],&#34;node_class&#34;:[&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;],&#34;Role&#34;:[2,2,2,1,null,2,null,null,1,2,1,1,2,2,1,2,null,1,null,1,1,1],&#34;Faction&#34;:[1,1,2,3,null,2,null,null,3,1,null,3,3,3,2,1,null,null,null,2,null,null],&#34;Resources&#34;:[1,0,2,2,null,3,null,null,2,0,2,2,0,1,2,0,null,2,null,2,2,2],&#34;hr_role&#34;:[&#34;Recieves orders&#34;,&#34;Recieves orders&#34;,&#34;Recieves orders&#34;,&#34;Gives orders&#34;,null,&#34;Recieves orders&#34;,null,null,&#34;Gives orders&#34;,&#34;Recieves orders&#34;,&#34;Gives orders&#34;,&#34;Gives orders&#34;,&#34;Recieves orders&#34;,&#34;Recieves orders&#34;,&#34;Gives orders&#34;,&#34;Recieves orders&#34;,null,&#34;Gives orders&#34;,null,&#34;Gives orders&#34;,&#34;Gives orders&#34;,&#34;Gives orders&#34;],&#34;hr_faction&#34;:[&#34;1st Generation Leadership Faction&#34;,&#34;1st Generation Leadership Faction&#34;,&#34;Koufontinas Faction&#34;,&#34;Sardanopoulos Faction&#34;,null,&#34;Koufontinas Faction&#34;,null,null,&#34;Sardanopoulos Faction&#34;,&#34;1st Generation Leadership Faction&#34;,null,&#34;Sardanopoulos Faction&#34;,&#34;Sardanopoulos Faction&#34;,&#34;Sardanopoulos Faction&#34;,&#34;Koufontinas Faction&#34;,&#34;1st Generation Leadership Faction&#34;,null,null,null,&#34;Koufontinas Faction&#34;,null,null],&#34;hr_resources&#34;:[&#34;Controls one resource&#34;,null,&#34;Controls two resources&#34;,&#34;Controls two resources&#34;,null,&#34;Controls three resources&#34;,null,null,&#34;Controls two resources&#34;,null,&#34;Controls two resources&#34;,&#34;Controls two resources&#34;,null,&#34;Controls one resource&#34;,&#34;Controls two resources&#34;,null,null,&#34;Controls two resources&#34;,null,&#34;Controls two resources&#34;,&#34;Controls two resources&#34;,&#34;Controls two resources&#34;],&#34;label&#34;:[&#34;Alexandros Giotopoulos&#34;,&#34;Anna&#34;,&#34;Christodoulos Xiros&#34;,&#34;Constantinos Karatsolis&#34;,&#34;Constantinos Telios&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dionysis Georgiadis&#34;,&#34;Elias Gaglias&#34;,&#34;Fotis&#34;,&#34;Iraklis Kostaris&#34;,&#34;Nikitas&#34;,&#34;Ojurk Hanuz&#34;,&#34;Patroclos Tselentis&#34;,&#34;Pavlos Serifis&#34;,&#34;Sardanopoulos&#34;,&#34;Savas Xiros&#34;,&#34;Sotirios Kondylis&#34;,&#34;Thomas Serifis&#34;,&#34;Vassilis Tzortzatos&#34;,&#34;Vassilis Xiros&#34;,&#34;Yiannis&#34;,&#34;Yiannis Skandalis&#34;],&#34;x&#34;:[-0.207385801897517,0.0736096916522917,0.0331774997614254,0.820355661254659,0.320917977791773,0.275715627089915,-1,0.750470381391917,-0.753764142390304,0.80374780776367,-0.958730932383519,-0.834124838238727,-0.0475974081357355,-0.213996603895314,-0.612707612026034,0.00288230475105311,1,0.405239523252783,-0.392695676161605,0.870378266715274,-0.477233217322469,-0.497362983918821],&#34;y&#34;:[0.00745241164098642,0.161576590035804,0.437171882513465,1,-0.524810163085274,0.451079313236033,-0.51430811535126,-1,0.00114282411584177,0.580725582848107,0.172743136030305,0.791485213318556,0.98821195398288,0.60531391975661,0.437845030849791,-0.171274894630837,-0.395633085045693,0.804266284013408,-0.683000113245754,0.14988103252644,0.260120973443358,0.9584145194948]},&#34;edges&#34;:{&#34;from&#34;:[&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Alexandros Giotopoulos&#34;,&#34;Anna&#34;,&#34;Anna&#34;,&#34;Anna&#34;,&#34;Anna&#34;,&#34;Anna&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Christodoulos Xiros&#34;,&#34;Constantinos Karatsolis&#34;,&#34;Constantinos Karatsolis&#34;,&#34;Constantinos Karatsolis&#34;,&#34;Constantinos Telios&#34;,&#34;Constantinos Telios&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Dionysis Georgiadis&#34;,&#34;Fotis&#34;,&#34;Fotis&#34;,&#34;Fotis&#34;,&#34;Fotis&#34;,&#34;Iraklis Kostaris&#34;,&#34;Iraklis Kostaris&#34;,&#34;Iraklis Kostaris&#34;,&#34;Iraklis Kostaris&#34;,&#34;Nikitas&#34;,&#34;Nikitas&#34;,&#34;Nikitas&#34;,&#34;Ojurk Hanuz&#34;,&#34;Ojurk Hanuz&#34;,&#34;Ojurk Hanuz&#34;,&#34;Patroclos Tselentis&#34;,&#34;Patroclos Tselentis&#34;,&#34;Patroclos Tselentis&#34;,&#34;Pavlos Serifis&#34;,&#34;Pavlos Serifis&#34;,&#34;Pavlos Serifis&#34;,&#34;Pavlos Serifis&#34;,&#34;Savas Xiros&#34;,&#34;Savas Xiros&#34;,&#34;Savas Xiros&#34;,&#34;Savas Xiros&#34;,&#34;Thomas Serifis&#34;],&#34;to&#34;:[&#34;Anna&#34;,&#34;Christodoulos Xiros&#34;,&#34;Constantinos Telios&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Fotis&#34;,&#34;Nikitas&#34;,&#34;Pavlos Serifis&#34;,&#34;Sardanopoulos&#34;,&#34;Savas Xiros&#34;,&#34;Yiannis&#34;,&#34;Fotis&#34;,&#34;Nikitas&#34;,&#34;Pavlos Serifis&#34;,&#34;Sardanopoulos&#34;,&#34;Yiannis&#34;,&#34;Dimitris Koufontinas&#34;,&#34;Iraklis Kostaris&#34;,&#34;Ojurk Hanuz&#34;,&#34;Patroclos Tselentis&#34;,&#34;Pavlos Serifis&#34;,&#34;Savas Xiros&#34;,&#34;Thomas Serifis&#34;,&#34;Vassilis Xiros&#34;,&#34;Yiannis&#34;,&#34;Yiannis Skandalis&#34;,&#34;Iraklis Kostaris&#34;,&#34;Pavlos Serifis&#34;,&#34;Thomas Serifis&#34;,&#34;Elias Gaglias&#34;,&#34;Savas Xiros&#34;,&#34;Iraklis Kostaris&#34;,&#34;Ojurk Hanuz&#34;,&#34;Patroclos Tselentis&#34;,&#34;Pavlos Serifis&#34;,&#34;Sardanopoulos&#34;,&#34;Savas Xiros&#34;,&#34;Thomas Serifis&#34;,&#34;Vassilis Xiros&#34;,&#34;Yiannis Skandalis&#34;,&#34;Savas Xiros&#34;,&#34;Nikitas&#34;,&#34;Pavlos Serifis&#34;,&#34;Sardanopoulos&#34;,&#34;Savas Xiros&#34;,&#34;Pavlos Serifis&#34;,&#34;Sardanopoulos&#34;,&#34;Thomas Serifis&#34;,&#34;Vassilis Xiros&#34;,&#34;Pavlos Serifis&#34;,&#34;Sardanopoulos&#34;,&#34;Savas Xiros&#34;,&#34;Patroclos Tselentis&#34;,&#34;Pavlos Serifis&#34;,&#34;Yiannis Skandalis&#34;,&#34;Pavlos Serifis&#34;,&#34;Thomas Serifis&#34;,&#34;Yiannis Skandalis&#34;,&#34;Sardanopoulos&#34;,&#34;Thomas Serifis&#34;,&#34;Yiannis&#34;,&#34;Yiannis Skandalis&#34;,&#34;Sotirios Kondylis&#34;,&#34;Vassilis Tzortzatos&#34;,&#34;Vassilis Xiros&#34;,&#34;Yiannis&#34;,&#34;Yiannis&#34;],&#34;from_class&#34;:[&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;],&#34;to_class&#34;:[&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;,&#34;person&#34;],&#34;edge_class&#34;:[&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;,&#34;connection&#34;]},&#34;nodesToDataframe&#34;:true,&#34;edgesToDataframe&#34;:true,&#34;options&#34;:{&#34;width&#34;:&#34;100%&#34;,&#34;height&#34;:&#34;100%&#34;,&#34;nodes&#34;:{&#34;shape&#34;:&#34;dot&#34;,&#34;physics&#34;:false,&#34;color&#34;:{&#34;highlight.border&#34;:&#34;black&#34;},&#34;shadow&#34;:{&#34;enabled&#34;:true,&#34;size&#34;:5}},&#34;manipulation&#34;:{&#34;enabled&#34;:false},&#34;edges&#34;:{&#34;smooth&#34;:false},&#34;physics&#34;:{&#34;stabilization&#34;:false},&#34;interaction&#34;:{&#34;hover&#34;:true,&#34;keyboard&#34;:true,&#34;navigationButtons&#34;:true}},&#34;groups&#34;:null,&#34;width&#34;:null,&#34;height&#34;:null,&#34;idselection&#34;:{&#34;enabled&#34;:true,&#34;style&#34;:&#34;font-size: 15px&#34;,&#34;useLabels&#34;:true,&#34;main&#34;:&#34;Select by id&#34;},&#34;byselection&#34;:{&#34;enabled&#34;:false,&#34;style&#34;:&#34;width: 150px; height: 26px&#34;,&#34;multiple&#34;:false,&#34;hideColor&#34;:&#34;rgba(200,200,200,0.5)&#34;},&#34;main&#34;:null,&#34;submain&#34;:null,&#34;footer&#34;:null,&#34;background&#34;:&#34;rgba(0, 0, 0, 0)&#34;,&#34;igraphlayout&#34;:{&#34;type&#34;:&#34;square&#34;},&#34;highlight&#34;:{&#34;enabled&#34;:true,&#34;hoverNearest&#34;:true,&#34;degree&#34;:1,&#34;algorithm&#34;:&#34;all&#34;,&#34;hideColor&#34;:&#34;rgba(200,200,200,0.5)&#34;,&#34;labelOnly&#34;:true},&#34;collapse&#34;:{&#34;enabled&#34;:false,&#34;fit&#34;:false,&#34;resetHighlight&#34;:true,&#34;clusterOptions&#34;:null,&#34;keepCoord&#34;:true,&#34;labelSuffix&#34;:&#34;(cluster)&#34;},&#34;tooltipStay&#34;:300,&#34;tooltipStyle&#34;:&#34;position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);&#34;,&#34;export&#34;:{&#34;type&#34;:&#34;png&#34;,&#34;css&#34;:&#34;float:right;-webkit-border-radius: 10;\n                  -moz-border-radius: 10;\n                  border-radius: 10px;\n                  font-family: Arial;\n                  color: #ffffff;\n                  font-size: 12px;\n                  background: #090a0a;\n                  padding: 4px 8px 4px 4px;\n                  text-decoration: none;&#34;,&#34;background&#34;:&#34;#fff&#34;,&#34;name&#34;:&#34;november17.png&#34;,&#34;label&#34;:&#34;Export as png&#34;}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div id=&#34;get-the-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Get the Data&lt;/h1&gt;
+&lt;div id=&#34;tables&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Tables&lt;/h2&gt;
+&lt;div id=&#34;nodes&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Nodes&lt;/h3&gt;
+&lt;div id=&#34;htmlwidget-2&#34; style=&#34;width:100%;height:auto;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-2&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/november17/index_files/figure-html//widgets/widget_unnamed-chunk-6.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;div id=&#34;edges&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Edges&lt;/h3&gt;
+&lt;div id=&#34;htmlwidget-3&#34; style=&#34;width:100%;height:auto;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-3&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/november17/index_files/figure-html//widgets/widget_unnamed-chunk-7.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;citation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Citation&lt;/h1&gt;
+&lt;p&gt;Rhodes C, Jones P (2009). “Inferring Missing Links in Partially
+Observed Social Networks.” &lt;em&gt;Journal of the Operational Research
+Society&lt;/em&gt;, &lt;em&gt;60&lt;/em&gt;, 1373-1383.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
