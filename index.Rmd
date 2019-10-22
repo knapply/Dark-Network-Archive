@@ -1,3 +1,6 @@
 ---
 site: blogdown:::blogdown_site
 ---
+
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e767e516-77fc-4471-927b-1308c27a6c12/deploy-status)](https://app.netlify.com/sites/core-dna/deploys)
