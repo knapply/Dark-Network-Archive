@@ -1,0 +1,225 @@
+---
+title: "The Noordin Top Terrorist Network"
+publishDate: "2019-12-14"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+image:
+  caption: 'Image credit: [**Wikimedia Commons**](https://commons.wikimedia.org/wiki/File:Captured_Citizens_Brought_Before_an_Anabaptist_Leader.jpg)'
+  focal_point: ""
+  preview_only: false
+tags: 
+- jihad
+- religious terrorism
+- suicide bombings
+summary: "These data were drawn primarily from two International Crisis Group (ICG) reports: “Terrorism in Indonesia: Noordin’s Networks” (International Crisis Group, 2006) and “Indonesia: Noordin Top’s Support Base” (International Crisis Group, 2009). The two ICG reports on Noordin contain rich one- and two-mode data on a variety of relations and affiliations (friendship, kinship, meetings, etc.) along with significant attribute data (education, group membership, physical status, etc.). The data were initially structured and analyzed by Naval Postgraduate School students in the course “Tracking and Disrupting Dark Networks” under the direction of Professor Sean Everton, Co-Director of the CORE Lab and Professor Nancy Roberts and then expanded and cleaned by Associate Faculty for Instruction, Dan Cunningham. "
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#code-book">Code Book</a></li>
+<li><a href="#sociogram">Sociogram</a></li>
+<li><a href="#get-the-data">Get the Data</a><ul>
+<li><a href="#tables">Tables</a><ul>
+<li><a href="#nodes">Nodes</a></li>
+<li><a href="#edges">Edges</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#citation">Citation</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>These data were drawn primarily from ‘Terrorism in Indonesia: Noordin’s Networks,’ a publication of the International Crisis Group (2006) and include relational data on the 79 individuals listed in Appendix C of that publication.</p>
+</div>
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+<p>These data were drawn primarily from two International Crisis Group (ICG) reports: “Terrorism in Indonesia: Noordin’s Networks” (International Crisis Group, 2006) and “Indonesia: Noordin Top’s Support Base” (International Crisis Group, 2009). The two ICG reports on Noordin contain rich one- and two-mode data on a variety of relations and affiliations (friendship, kinship, meetings, etc.) along with significant attribute data (education, group membership, physical status, etc.). The data were initially structured and analyzed by Naval Postgraduate School students in the course “Tracking and Disrupting Dark Networks” under the direction of Professor Sean Everton, Co-Director of the CORE Lab and Professor Nancy Roberts and then expanded and cleaned by Associate Faculty for Instruction, Dan Cunningham.</p>
+</div>
+<div id="code-book" class="section level1">
+<h1>Code Book</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">edge_class</th>
+<th align="left">is_bimodal</th>
+<th align="left">is_directed</th>
+<th align="left">is_dynamic</th>
+<th align="left">is_weighted</th>
+<th align="left">definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Organizations (Orgs)</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Terrorist/Insurgent and Affiliated Organizations: A terrorist/insurgent organization is defined as an administrative and functional system, whose primary common goal is the operational conduct of terrorist/insurgent activities, consisting of willingly affiliated claimant members. For the purpose of this exercise, factions and offshoots will be considered separate from their parent organization in order to prevent from coding redundant ties. In other words, the most micro-level affiliations are coded while an individual is only coded in the parent organization if he or she is not listed as being affiliated with a component organization. Terrorist/insurgent affiliated organizations, such MMI and FPI, are also coded in this matrix.</td>
+</tr>
+<tr class="even">
+<td align="left">Education (Schools)</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Educational Relations: Educational relations are defined as schools where individuals receive formal education, serve as an employee (teacher, admin etc.), and/or involved in additional educational or religious instruction at the institution.</td>
+</tr>
+<tr class="odd">
+<td align="left">Classmates</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Classmate Relations:Classmates/educational colleagues are defined as individuals who receive formal education, serve as an employee (teacher, admin etc.), and/or involved in additional educational or religious instruction at the same institution and at the same time. This relationship is more likely to reflect accurate relationships than the two-mode “Educational Affiliation” matrix since it considers the time in which individuals are present at a school.</td>
+</tr>
+<tr class="even">
+<td align="left">Communication Ties</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Internal Communication: Internal communication is defined as the relaying of messages between individuals and/or groups inside the network through some sort of medium.</td>
+</tr>
+<tr class="odd">
+<td align="left">Kinship Ties</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Kinship: Kinship is defined as any family connection such as brother, brother-in-law, nephew etc. Kinship will also include current marriages and past marriages due to divorces and/or deaths.</td>
+</tr>
+<tr class="even">
+<td align="left">Training Events</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Training Relations: Participation in any specifically designated activity that teaches the knowledge, skills, and competencies of terrorism and insurgency. Training does not include participation in a terrorist sponsored act or mujahedeen activity in places such as Afghanistan, Bosnia, Chechnya, or Iraq unless the individuals’ presence was to participate in a specifically designated training camp or base in one of these areas.</td>
+</tr>
+<tr class="odd">
+<td align="left">Business &amp; Finance</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Business Relations: Defined as profit and non-profit organizations that employ people (includes Durassalam Foundation).</td>
+</tr>
+<tr class="even">
+<td align="left">Operations</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Operations: Operational relations are defined as individuals who are knowingly involved in preparing, executing, and/or providing post-operation support. Preparation must directly relate to the operation and can include surveying targets, providing a safehouse for preparation, contributing to religious and/or physical training, and participating in a robbery where proceeds fund a subsequent attack. Providing post-operation support, such as hiding fugitives and disposing of explosives, must also be directly related to the operation.</td>
+</tr>
+<tr class="odd">
+<td align="left">Friendship Ties</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Friendship Relations: Friendship relations are defined as close attachments through affection or esteem between two people. Friendship ties are not defined solely as meetings and/ or school ties.</td>
+</tr>
+<tr class="even">
+<td align="left">Religious Affiliation</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Religious Relations: Religious relations are defined as an association with a mosque, church, synagogue or religious study circle. Religious study circles are only coded if they are separate from other religious entities (i.e. mosque). We do not include Islamic schools even though we assume that the schools have mosques. Not using the schools prevents duplication of effort with the team constructing the school ties. Additionally, we listed the mosques by the town in which it is located. If there was more than one in a city, we added a numerical identifier plus the name of nearest location.</td>
+</tr>
+<tr class="odd">
+<td align="left">Soulmates</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Soulmate Relations: Soulmate relations are defined as individuals who are affiliated with the same religious institution at the same time. This relationship is more likely to indicate accurate religious ties than the “religious affiliation” since it considers the timeframes in which individuals are affiliated with religious institutions.</td>
+</tr>
+<tr class="even">
+<td align="left">Logistical Place</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Logistical Relations: Logistical relations are defined to mean a Key Place within the archipelago where logistical activity occurred. Logistical activity is defined as providing “safe houses” for meeting/hiding, providing material support in terms of explosives, providing weaponry, or facilitating transportation of personnel or equipment.</td>
+</tr>
+<tr class="odd">
+<td align="left">Logistical Function</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Logistic Functions: Logistical functions are defined as the support for terrorist/insurgency operations by providing materials, weapons, transportation and safehouses.</td>
+</tr>
+<tr class="even">
+<td align="left">Meetings</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Meetings: A preplanned, coordinated event between two or more individuals. Meetings do not include all styles of communications. Rather, Meeting refers to a certain location at a certain date with specific individuals. Meetings infer the necessity of a decision, but the data does not specifically identify the decision or meeting subject.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sociogram" class="section level1">
+<h1>Sociogram</h1>
+<!-- ```{r, out.width='100%', fig.height=9} -->
+<!-- g %>%  -->
+<!--   visNetwork::visIgraph() %>%  -->
+<!--   visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>%  -->
+<!--   visNetwork::visNodes( -->
+<!--     color = list(highlight.border = "black"),  -->
+<!--     shadow = list(enabled = TRUE, size = 5) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visOptions( -->
+<!--     highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE), -->
+<!--     # selectedBy = list( -->
+<!--     #   variable = "group", -->
+<!--     #   style = "font-size: 15px" -->
+<!--     # ), -->
+<!--     nodesIdSelection = list( -->
+<!--       enabled = TRUE, -->
+<!--       style = "font-size: 15px" -->
+<!--     ) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>%  -->
+<!--   visNetwork::visExport(name = proto_net$reference$name) -->
+<!-- ``` -->
+<div id="htmlwidget-1" style="width:720px;height:864px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/publication/noordin_139/index_files/figure-html//widgets/widget_unnamed-chunk-5.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="get-the-data" class="section level1">
+<h1>Get the Data</h1>
+<div id="tables" class="section level2">
+<h2>Tables</h2>
+<div id="nodes" class="section level3">
+<h3>Nodes</h3>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/publication/noordin_139/index_files/figure-html//widgets/widget_unnamed-chunk-6.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="edges" class="section level3">
+<h3>Edges</h3>
+<div id="htmlwidget-3" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/publication/noordin_139/index_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="citation" class="section level1">
+<h1>Citation</h1>
+<p>Roberts N, Everton S, Cunningham D (2014). “The Noordin Top Network.”
+Data provided by the authors.</p>
+</div>

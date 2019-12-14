@@ -1,0 +1,123 @@
+---
+title: "Montreal Street Gangs Network"
+publishDate: "2019-12-14"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+image:
+  caption: 'Image credit: [**Wikimedia Commons**](https://commons.wikimedia.org/wiki/File:Captured_Citizens_Brought_Before_an_Anabaptist_Leader.jpg)'
+  focal_point: ""
+  preview_only: false
+tags: 
+- gangs
+- internal structure
+- alliances
+- conflicts
+summary: "Religiously motivated violence is and always will be a relevant topic. To address and effectively counter contemporary violent groups, it is important to investigate similar historic groups. This thesis attempts to answer the research question: 'During the Radical Reformation, why did some Anabaptist groups accept the use of violence while others did not, and how did the movement evolve to pacifism?' To answer this question, this study utilizes a mixed methodology of case study analysis and social network analysis of Anabaptist leaders during the 16th century. This thesis argues that violent ideology is largely a function of three factors: charismatic leadership, isolation, and apocalypticism. The interaction of these factors led to the emergence of Anabaptist groups that embraced the use of violence. However, groups' internal characteristics can also lead them away from violence. In the case of the Anabaptists, social proximity assisted leaders with a counter-message to speak effectively to violent ultra-radical factions. The goal of this thesis is to identify characteristics of religious groups that may signal the potential for future violence, while also providing insight into which leaders may be capable of re-directing groups that have become violent."
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#code-book">Code Book</a></li>
+<li><a href="#sociogram">Sociogram</a></li>
+<li><a href="#get-the-data">Get the Data</a><ul>
+<li><a href="#tables">Tables</a><ul>
+<li><a href="#nodes">Nodes</a></li>
+<li><a href="#edges">Edges</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#citation">Citation</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This dataset examines social networks between early Anabaptist leaders. Together with the dataset on the beliefs of early Anabaptist leaders and groups, it can be used to examine the diffusion of theology and ideas among early Anabaptist leaders.</p>
+</div>
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+<p>Religiously motivated violence is and always will be a relevant topic. To address and effectively counter contemporary violent groups, it is important to investigate similar historic groups. This thesis attempts to answer the research question: ‘During the Radical Reformation, why did some Anabaptist groups accept the use of violence while others did not, and how did the movement evolve to pacifism?’ To answer this question, this study utilizes a mixed methodology of case study analysis and social network analysis of Anabaptist leaders during the 16th century. This thesis argues that violent ideology is largely a function of three factors: charismatic leadership, isolation, and apocalypticism. The interaction of these factors led to the emergence of Anabaptist groups that embraced the use of violence. However, groups’ internal characteristics can also lead them away from violence. In the case of the Anabaptists, social proximity assisted leaders with a counter-message to speak effectively to violent ultra-radical factions. The goal of this thesis is to identify characteristics of religious groups that may signal the potential for future violence, while also providing insight into which leaders may be capable of re-directing groups that have become violent.</p>
+</div>
+<div id="code-book" class="section level1">
+<h1>Code Book</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">edge_class</th>
+<th align="left">is_bimodal</th>
+<th align="left">is_directed</th>
+<th align="left">is_dynamic</th>
+<th align="left">is_weighted</th>
+<th align="left">definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">affiliation</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Undirected and binary ties refering to affiliaioin between gangs. These data have been reconstrustructed by members of the UCINET team from Karine Descomiers and Carlo Morselli’s 2011 article ‘Alliances, Conflicts and Contraditions in Montreal’s Street Gang Landscape’, which appeared on the International Criminal Justice Review.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sociogram" class="section level1">
+<h1>Sociogram</h1>
+<!-- ```{r, out.width='100%', fig.height=9} -->
+<!-- g %>%  -->
+<!--   visNetwork::visIgraph() %>%  -->
+<!--   visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>%  -->
+<!--   visNetwork::visNodes( -->
+<!--     color = list(highlight.border = "black"),  -->
+<!--     shadow = list(enabled = TRUE, size = 5) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visOptions( -->
+<!--     highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE), -->
+<!--     # selectedBy = list( -->
+<!--     #   variable = "group", -->
+<!--     #   style = "font-size: 15px" -->
+<!--     # ), -->
+<!--     nodesIdSelection = list( -->
+<!--       enabled = TRUE, -->
+<!--       style = "font-size: 15px" -->
+<!--     ) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>%  -->
+<!--   visNetwork::visExport(name = proto_net$reference$name) -->
+<!-- ``` -->
+<div id="htmlwidget-1" style="width:720px;height:864px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/publication/montreal_street_gangs/index_files/figure-html//widgets/widget_unnamed-chunk-5.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="get-the-data" class="section level1">
+<h1>Get the Data</h1>
+<div id="tables" class="section level2">
+<h2>Tables</h2>
+<div id="nodes" class="section level3">
+<h3>Nodes</h3>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/publication/montreal_street_gangs/index_files/figure-html//widgets/widget_unnamed-chunk-6.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="edges" class="section level3">
+<h3>Edges</h3>
+<div id="htmlwidget-3" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/publication/montreal_street_gangs/index_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="citation" class="section level1">
+<h1>Citation</h1>
+<p>Kescormiers K, Morselli C (2011). “Alliances, Conflicts, and
+Contradictions in Montreal’s Street Gang Landscape.” <em>International
+Criminal Justice Review</em>, <em>1</em>, 297-314.</p>
+</div>

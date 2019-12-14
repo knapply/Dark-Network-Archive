@@ -1,0 +1,239 @@
+---
+title: "Project Ciel"
+publishDate: "`r Sys.Date()`"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+image:
+  caption: 'Image credit: [**Wikimedia Commons**](https://commons.wikimedia.org/wiki/File:Captured_Citizens_Brought_Before_an_Anabaptist_Leader.jpg)'
+  focal_point: ""
+  preview_only: false
+tags: 
+- drug traffickers
+- criminal network
+summary: "Project Ciel is based on a small drug-importation network that was importing liquid hashish from Jamaica to Montreal. This network was targeted by the Royal Canadian Mounted Police and the Montreal Police from May 1996 to June 1997. Typical of many Canadian investigations of drug smuggling and trafficking, the operations in Project Ciel were described as taking place within a tightly governed organizational framework—a hierarchy, in short. Reports from the investigation maintained that the main target of the investigation was the “organizational leader.” Other key targets included the leader’s “lieutenant” and a series of other subordinates. The investigation produced three separate seizures, with two taking place at Mirabel airport near Montreal and another occurring at Sangster airport in Jamaica. Overall, 75 people fell into the surveillance net. A selection process that was aimed at identifying only those individuals who were active in the drug-importation operations resulted in a final network of 25 participants."
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+options(warn = 2) # FAIL ON ANY WARNINGS
+
+`%>%` <- magrittr::`%>%`
+```
+
+```{r}
+proto_net <- COREnets::get_data("ciel")
+# g <- COREnets::core_as_igraph(proto_net)
+
+build_net <- function(edge_table, node_table,
+                      edge_class, directed) {
+  target_edges <- edge_table[
+    edge_table$edge_class == edge_class, 
+  ]
+  
+  target_nodes <- node_table[
+    node_table$name %in% c(target_edges$from, target_edges$to), 
+  ]
+  
+  igraph::graph_from_data_frame(
+    d = target_edges,
+    directed = directed,
+    vertices = target_nodes
+  )
+}
+
+build_nets <- function(proto_net) {
+  templates <- split(proto_net$reference$codebook, 
+                    seq_len(nrow(proto_net$reference$codebook)))
+  names(templates) <- proto_net$reference$codebook$edge_class
+
+  lapply(templates, function(.x) {
+    build_net(edge_table = proto_net$network$edges_table, 
+              node_table = proto_net$network$nodes_table,
+              edge_class = .x$edge_class,
+              directed = .x$is_directed)
+  })
+}
+
+g <- build_nets(proto_net)
+```
+
+
+# Introduction
+
+```{r, results='asis'}
+cat(proto_net$reference$description)
+```
+
+# Abstract
+
+```{r, results='asis'}
+cat(proto_net$reference$abstract)
+```
+
+# Code Book
+
+
+```{r}
+knitr::kable(proto_net$reference$codebook)
+```
+
+
+# Sociogram
+
+
+<!-- ```{r, out.width='100%', fig.height=9} -->
+<!-- g %>%  -->
+<!--   visNetwork::visIgraph() %>%  -->
+<!--   visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>%  -->
+<!--   visNetwork::visNodes( -->
+<!--     color = list(highlight.border = "black"),  -->
+<!--     shadow = list(enabled = TRUE, size = 5) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visOptions( -->
+<!--     highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE), -->
+<!--     # selectedBy = list( -->
+<!--     #   variable = "group", -->
+<!--     #   style = "font-size: 15px" -->
+<!--     # ), -->
+<!--     nodesIdSelection = list( -->
+<!--       enabled = TRUE, -->
+<!--       style = "font-size: 15px" -->
+<!--     ) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>%  -->
+<!--   visNetwork::visExport(name = proto_net$reference$name) -->
+<!-- ``` -->
+
+
+```{r, out.width='100%', fig.height=9}
+build_vis_net <- function(g, title) {
+  dat <- visNetwork::toVisNetworkData(g)
+  
+  visNetwork::visNetwork(nodes = dat$nodes, edges = dat$edges,
+                         main = title,
+                         height = 800,
+                         width = 680) %>% 
+    visNetwork::visIgraphLayout(layout = "layout_with_graphopt",
+                                randomSeed = 831) %>% 
+    # visNetwork::visIgraphLayout(layout = "layout.norm",
+                                # layoutMatrix = coords) %>% 
+    visNetwork::visNodes(
+      color = list(highlight.border = "black"),
+      shadow = list(enabled = TRUE, size = 5)
+    ) %>%
+    visNetwork::visOptions(
+      highlightNearest = list(enabled = TRUE,
+                              degree = 1,
+                              hover = TRUE),
+      nodesIdSelection = list(
+        enabled = TRUE,
+        style = "font-size: 15px"
+      )
+    )
+}
+
+
+# full_g <- igraph::graph_from_data_frame(
+#   d = proto_net$network$edges_table,
+#   vertices = proto_net$network$nodes_table
+# )
+
+# vis_coords <- igraph::layout_with_kk(full_g)
+
+vis_nets <- purrr::imap(g, build_vis_net)
+
+temp_dir <- tempdir(check = TRUE)
+
+for (i in seq_along(vis_nets)) {
+ htmlwidgets::saveWidget(
+   vis_nets[[i]],
+   file = sprintf("%s/Project Ciel%s.html", temp_dir, i)
+  )
+}
+
+vis_paths <- dir(temp_dir, pattern = "Project Ciel\\d+\\.html$",
+                 full.names = TRUE)
+for_slick <- purrr::map_chr(vis_paths, readr::read_file)
+
+unlink(temp_dir, force = TRUE)
+
+slick <- slickR::slickR(for_slick, slideType = "iframe",
+       height = 900, width = 720) +
+  slickR::settings(dots = TRUE, 
+                   autoplay = TRUE) 
+
+widgetframe::frameWidget(slick, width = 720)
+```
+
+
+# Get the Data
+
+## Tables
+
+### Nodes
+
+```{r}
+proto_net$network$nodes_table %>% 
+  tibble::as_tibble() %>%
+  DT::datatable(
+    rownames = FALSE,
+    filter="top",
+    extensions = "Buttons",
+    options = list(
+      dom = "Bfrtip",
+      buttons = list(
+        "copy", "print",
+        list(extend = "csv", filename = glue::glue("{proto_net$network$nodes_table}_nodes")),
+        list(extend = "excel", filename = glue::glue("{proto_net$network$nodes_table}_nodes"))
+      ),
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  ) %>%
+  widgetframe::frameWidget(height = "auto")
+```
+
+
+### Edges
+
+
+```{r}
+proto_net$network$edges_table %>% 
+  tibble::as_tibble() %>%
+  dplyr::rename(source = from, target = to) %>%
+  DT::datatable(
+    rownames = FALSE,
+    filter="top",
+    extensions = "Buttons",
+    options = list(
+      dom = "Bfrtip",
+      buttons = list(
+        "copy", "print",
+        list(extend = "csv", filename = glue::glue("{proto_net$network$edge_table}_edges")),
+        list(extend = "excel", filename = glue::glue("{proto_net$network$edge_table}_edges"))
+      ),
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  ) %>%
+  widgetframe::frameWidget(height = "auto")
+```
+
+
+# Citation
+
+
+```{r, results='asis'}
+proto_net$reference$bibtex
+```
+
+
+
+

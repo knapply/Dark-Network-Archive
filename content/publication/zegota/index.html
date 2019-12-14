@@ -1,0 +1,176 @@
+---
+title: "Zegota"
+publishDate: "2019-12-14"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+image:
+  caption: 'Image credit: [**Wikimedia Commons**](https://commons.wikimedia.org/wiki/File:Captured_Citizens_Brought_Before_an_Anabaptist_Leader.jpg)'
+  focal_point: ""
+  preview_only: false
+tags: 
+- resistance group
+summary: "From 1942 to 1945, Zegota served as an underground organization of Polish resistance in German-occupied Poland. While, the individual organizations that make up this network were developed to provide security, gather food, coordinate excapes, rescue children, provide education, and counter anti-Jewish propaganda to name a few, until the formation of Zegota in 1942 none served to aid Jews. The authors of this research focused on how Zegota synchronized the efforts of multiple organizations to achieve a particular goal."
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#code-book">Code Book</a></li>
+<li><a href="#sociogram">Sociogram</a></li>
+<li><a href="#get-the-data">Get the Data</a><ul>
+<li><a href="#tables">Tables</a><ul>
+<li><a href="#nodes">Nodes</a></li>
+<li><a href="#edges">Edges</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#citation">Citation</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This network represents a multitude of Polish resistance organization in Nazi occupied Poland (1942 -1945). The authors explore how Zegota, an underground organization, served as a synchronizing element in this broader network. Specifically, the ability to ‘galvanize conditional actors to lead, manage and fascilitate a collection of networks toward a unified objective’.</p>
+</div>
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+<p>From 1942 to 1945, Zegota served as an underground organization of Polish resistance in German-occupied Poland. While, the individual organizations that make up this network were developed to provide security, gather food, coordinate excapes, rescue children, provide education, and counter anti-Jewish propaganda to name a few, until the formation of Zegota in 1942 none served to aid Jews. The authors of this research focused on how Zegota synchronized the efforts of multiple organizations to achieve a particular goal.</p>
+</div>
+<div id="code-book" class="section level1">
+<h1>Code Book</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">edge_class</th>
+<th align="left">is_bimodal</th>
+<th align="left">is_directed</th>
+<th align="left">is_dynamic</th>
+<th align="left">is_weighted</th>
+<th align="left">definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Zegota Friendship Network</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Not defined by the authors, but noted as ‘indicative of trust between actors’.</td>
+</tr>
+<tr class="even">
+<td align="left">Zegota Kinship Network</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Such as brother, brother-in-law, nephew and marriages.</td>
+</tr>
+<tr class="odd">
+<td align="left">Zegota Operational Contacts</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Not defined by the authors. Ties people to people.</td>
+</tr>
+<tr class="even">
+<td align="left">Organizational Roles</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Not defined by the authors. Ties people to roles (e.g., founder, leader, etc.).</td>
+</tr>
+<tr class="odd">
+<td align="left">Zegota Cells</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Not defined by the authors. Ties people to organizations internal to Zegota (e.g., Anti-szmalcownik Cell, Child welfare Cell, etc.).</td>
+</tr>
+<tr class="even">
+<td align="left">Zegota Internal Roles</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Not defined by the authors. Ties people to roles (e.g., founder, leader, etc.).</td>
+</tr>
+<tr class="odd">
+<td align="left">Zegota Organizations</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Not defined by the authors. Ties people to organizations external to Zegota (e.g., Allied Forces and Leaders, Armia Krajowa (Home Army), etc.).</td>
+</tr>
+<tr class="even">
+<td align="left">Zegota Regions</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Not defined by the authors. Ties people to regions (e.g., Aushwitz, United States, etc.).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sociogram" class="section level1">
+<h1>Sociogram</h1>
+<!-- ```{r, out.width='100%', fig.height=9} -->
+<!-- g %>%  -->
+<!--   visNetwork::visIgraph() %>%  -->
+<!--   visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>%  -->
+<!--   visNetwork::visNodes( -->
+<!--     color = list(highlight.border = "black"),  -->
+<!--     shadow = list(enabled = TRUE, size = 5) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visOptions( -->
+<!--     highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE), -->
+<!--     # selectedBy = list( -->
+<!--     #   variable = "group", -->
+<!--     #   style = "font-size: 15px" -->
+<!--     # ), -->
+<!--     nodesIdSelection = list( -->
+<!--       enabled = TRUE, -->
+<!--       style = "font-size: 15px" -->
+<!--     ) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>%  -->
+<!--   visNetwork::visExport(name = proto_net$reference$name) -->
+<!-- ``` -->
+<div id="htmlwidget-1" style="width:720px;height:864px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/publication/zegota/index_files/figure-html//widgets/widget_unnamed-chunk-5.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="get-the-data" class="section level1">
+<h1>Get the Data</h1>
+<div id="tables" class="section level2">
+<h2>Tables</h2>
+<div id="nodes" class="section level3">
+<h3>Nodes</h3>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/publication/zegota/index_files/figure-html//widgets/widget_unnamed-chunk-6.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="edges" class="section level3">
+<h3>Edges</h3>
+<div id="htmlwidget-3" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/publication/zegota/index_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="citation" class="section level1">
+<h1>Citation</h1>
+<p>Kemokay NS, Ludwig T (2013). <em>UW Conceptualization of Resistance
+Networks: Illuminating 21st Century Uncertainty</em>. Masters of Science
+Thesis, Naval Postgraduate School, Department of Defense Analysis.</p>
+</div>

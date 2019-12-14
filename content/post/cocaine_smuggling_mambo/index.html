@@ -1,12 +1,16 @@
 ---
 title: "Cocaine Smuggling Operation MAMBO"
-publishDate: "2019-10-21"
+publishDate: "2019-12-14"
 output: 
   blogdown::html_page:
     toc: true
 featured: true
 editor_options: 
   chunk_output_type: console
+image:
+  caption: 'Image credit: [**Wikimedia Commons**](https://commons.wikimedia.org/wiki/File:Captured_Citizens_Brought_Before_an_Anabaptist_Leader.jpg)'
+  focal_point: ""
+  preview_only: false
 tags: 
 - drug smuggling
 - crime
@@ -14,14 +18,6 @@ summary: "These data refer to one of four illicit drug networks operating in Spa
 ---
 
 <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
-<link href="/rmarkdown-libs/vis/vis.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/vis/vis.min.js"></script>
-<script src="/rmarkdown-libs/visNetwork-binding/visNetwork.js"></script>
-<script src="/rmarkdown-libs/FileSaver/FileSaver.min.js"></script>
-<script src="/rmarkdown-libs/Blob/Blob.js"></script>
-<script src="/rmarkdown-libs/canvas-toBlob/canvas-toBlob.js"></script>
-<script src="/rmarkdown-libs/html2canvas/html2canvas.js"></script>
-<script src="/rmarkdown-libs/jspdf/jspdf.debug.js"></script>
 <script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
 <script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
 
@@ -76,8 +72,30 @@ summary: "These data refer to one of four illicit drug networks operating in Spa
 </div>
 <div id="sociogram" class="section level1">
 <h1>Sociogram</h1>
-<div id="htmlwidget-1" style="width:100%;height:864px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"nodes":{"id":["A","AP","ARG","CPGT","EDRS","ELM","ERC","FR","HAMS","HPM","JB","JDD","JE","JEAB","JG","JJTE","JO","JPPM","LIRP","PCCP","SNRM","RS","GA","YPMG","JHLM","OS","JV","RAJH","RB","VR","WGV"],"node_class":["person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person"],"label":["A","AP","ARG","CPGT","EDRS","ELM","ERC","FR","HAMS","HPM","JB","JDD","JE","JEAB","JG","JJTE","JO","JPPM","LIRP","PCCP","SNRM","RS","GA","YPMG","JHLM","OS","JV","RAJH","RB","VR","WGV"],"x":[-0.542564582184064,-0.840823508755712,-0.698298048548622,-0.236532974066666,0.338329477771175,-0.561713441636786,0.475617825896029,-0.680780401781019,-0.00815204798319324,-0.869397780633973,-0.31901021098075,-0.926366643558213,0.269139316972348,0.390986027222689,0.225569993463876,0.529859286697544,0.0921954135808327,-0.507432238814318,-0.968675468553941,-0.318913569965348,-0.0245019372797775,-1,-0.154526528647007,0.326675564610403,0.823522970741797,-0.892907311203344,0.875276569556455,1,0.913898865234156,-0.0490604699854081,0.337355529371383],"y":[0.835682924314528,0.467943317580742,0.49179451766336,0.369863859305772,0.417843555396523,-0.0455047869511788,-1,-0.432801123066157,0.235323713088818,0.40486118103545,-0.389289295640095,-0.0576868429579388,0.585182179977714,-0.434476273849532,-0.489159307205226,-0.0106614753983054,0.536062792082568,0.0722111322055805,-0.248604716640587,-0.135235592114755,-2.92177245286851e-007,0.153562752745295,1,0.237144456360533,-0.71446406859356,-0.484210078994902,0.424913882721982,0.0787244600251638,-0.409077159039169,-0.679208286792449,-0.107529270873484]},"edges":{"from":["A","A","AP","AP","AP","ARG","ARG","CPGT","CPGT","CPGT","CPGT","CPGT","EDRS","ELM","ELM","ELM","ELM","ELM","ELM","ELM","ELM","ERC","ERC","FR","FR","FR","HAMS","HAMS","HAMS","HAMS","HAMS","HPM","HPM","JB","JB","JDD","JDD","JE","JEAB","JEAB","JG","JG","JJTE","JJTE","JJTE","JJTE","JJTE","JO","JPPM","JPPM","JPPM","JPPM","JPPM","LIRP","PCCP","SNRM","SNRM","SNRM"],"to":["CPGT","HPM","ELM","JPPM","RS","JDD","JPPM","GA","JPPM","PCCP","SNRM","YPMG","SNRM","FR","HPM","JB","JDD","JPPM","LIRP","RS","SNRM","JEAB","JHLM","JDD","JPPM","PCCP","JEAB","JJTE","JPPM","SNRM","YPMG","JPPM","RS","JPPM","SNRM","JPPM","OS","SNRM","JHLM","SNRM","JJTE","SNRM","JV","RAJH","RB","SNRM","YPMG","SNRM","LIRP","OS","PCCP","RS","SNRM","RS","SNRM","VR","WGV","YPMG"],"from_class":["person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person"],"to_class":["person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person","person"],"edge_class":["person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person","person-to-person"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false,"color":{"highlight.border":"black"},"shadow":{"enabled":true,"size":5}},"manipulation":{"enabled":false},"edges":{"smooth":false},"physics":{"stabilization":false},"interaction":{"hover":true,"keyboard":true,"navigationButtons":true}},"groups":null,"width":null,"height":null,"idselection":{"enabled":true,"style":"font-size: 15px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)"},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","igraphlayout":{"type":"square"},"highlight":{"enabled":true,"hoverNearest":true,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);","export":{"type":"png","css":"float:right;-webkit-border-radius: 10;\n                  -moz-border-radius: 10;\n                  border-radius: 10px;\n                  font-family: Arial;\n                  color: #ffffff;\n                  font-size: 12px;\n                  background: #090a0a;\n                  padding: 4px 8px 4px 4px;\n                  text-decoration: none;","background":"#fff","name":"cocaine_smuggling_mambo.png","label":"Export as png"}},"evals":[],"jsHooks":[]}</script>
+<!-- ```{r, out.width='100%', fig.height=9} -->
+<!-- g %>%  -->
+<!--   visNetwork::visIgraph() %>%  -->
+<!--   visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>%  -->
+<!--   visNetwork::visNodes( -->
+<!--     color = list(highlight.border = "black"),  -->
+<!--     shadow = list(enabled = TRUE, size = 5) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visOptions( -->
+<!--     highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE), -->
+<!--     # selectedBy = list( -->
+<!--     #   variable = "group", -->
+<!--     #   style = "font-size: 15px" -->
+<!--     # ), -->
+<!--     nodesIdSelection = list( -->
+<!--       enabled = TRUE, -->
+<!--       style = "font-size: 15px" -->
+<!--     ) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>%  -->
+<!--   visNetwork::visExport(name = proto_net$reference$name) -->
+<!-- ``` -->
+<div id="htmlwidget-1" style="width:720px;height:864px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/cocaine_smuggling_mambo/index_files/figure-html//widgets/widget_unnamed-chunk-5.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="get-the-data" class="section level1">
 <h1>Get the Data</h1>

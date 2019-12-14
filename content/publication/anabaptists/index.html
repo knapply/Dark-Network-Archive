@@ -1,0 +1,128 @@
+---
+title: "Anabaptist Leadership Network"
+publishDate: "2019-12-14"
+output: 
+  blogdown::html_page:
+    toc: true
+featured: true
+editor_options: 
+  chunk_output_type: console
+image:
+  caption: 'Image credit: [**Wikimedia Commons**](https://commons.wikimedia.org/wiki/File:Captured_Citizens_Brought_Before_an_Anabaptist_Leader.jpg)'
+  focal_point: ""
+  preview_only: false
+tags: 
+- Anabaptists
+- religious violence
+- charismatic leadership
+- isolation
+- apocalypticism
+summary: "Historically, organized religion has been associated with large-scale cooperative activities- sometimes including the use of violence against groups of religious outsiders.  Originally used in the article, “Cultural inheritance or cultural diffusion of religious violence? A quantitative case study of the Radical Reformation,” (Matthews, Edmons, Wildman, Nunn, 2013), a network of sixteenth-century Anabaptist were created to understand how religious violence diffused through the congregations. Almost half of the congregations represented groups advocating for the use of violence to overthrow established churches and governments toward the ultimate goal of establishing Christian theocracies, with the other half being pacifists.  Actors and their stances on violence in the network were defined and coded based on their appearances within Anabaptist literature, and systematic collection of states for Anabaptist denominations.  The authors used a number of statistical analyses to determine that violent ideology may be learned independently from most other characteristics of an overall belief system, and/or may be determined more by congregationally inherited economic and political factors than by theology (Matthews, 2013). The data was expanded from 49 to 67 leaders with documented ties during its use in  “Factors of Religious Violence and Path to Peace: A Study of the 16th Century Anabaptists,” (McLaughlin, J 2015) to include Anabaptist and Prodestant leaders that were influential during the Protestant Reformation and the Radical Reformation that have documented interactions.  Documented interactions between individuals include instances of the actors meeting each other, or were in conversation, but in many cases, the leaders worked together, or went to school together. In other cases, they opposed one another in debates and were at total odds with one another.  McLaughlin determines through a variety of statistical methods that the propagation of theology that sanctions the use of violence was limited to a particular group of people with a particular set of beliefs associated with three factors: charismatic leadership, isolation, and apocalypticism, while also being strongly impacted by the theologies of emerging leaders. "
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#code-book">Code Book</a></li>
+<li><a href="#sociogram">Sociogram</a></li>
+<li><a href="#get-the-data">Get the Data</a><ul>
+<li><a href="#tables">Tables</a><ul>
+<li><a href="#nodes">Nodes</a></li>
+<li><a href="#edges">Edges</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#citation">Citation</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This data represents an undirected network of 67 influential relgious leaders during the Protestant Reformation and Radical Reformation during the 16th century. Of the 67 individuals, 55 have been categorized as Anabaptists. The data was obtained from the article, “Factors of Religious Violence and Path to Peace: A Study of the 16th Century Anabaptists,” (McLaughlin, J 2015), a Master’s Thesis at the Naval Postgraduate School, but was originally curated for use in the article, “Cultural inheritance or cultural diffusion of religious violence? A quantitative case study of the Radical Reformation,” (Matthews, Edmons, Wildman, Nunn, 2013). This data accounts for a variety of node attributes including if the individual is a believer in Baptist theology, sanctions violence, participated in the Munster Rebellion, believes in apocalyptic theology, and an Anabaptist or Lutheran. Furthermore, accounted for is an individual’s origin and the location they are based in, and their participation in each specific religious sect (Melchiorite-Hofmannite, Hut-Austrian, Swiss Brethren, Denck-South German, Hutterite, reformed Lutheran, other Prodestant, and tradition). Ties represent that individuals had met at least once, but does not signify agreement or disagreements in theology.</p>
+</div>
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+<p>Historically, organized religion has been associated with large-scale cooperative activities- sometimes including the use of violence against groups of religious outsiders. Originally used in the article, “Cultural inheritance or cultural diffusion of religious violence? A quantitative case study of the Radical Reformation,” (Matthews, Edmons, Wildman, Nunn, 2013), a network of sixteenth-century Anabaptist were created to understand how religious violence diffused through the congregations. Almost half of the congregations represented groups advocating for the use of violence to overthrow established churches and governments toward the ultimate goal of establishing Christian theocracies, with the other half being pacifists. Actors and their stances on violence in the network were defined and coded based on their appearances within Anabaptist literature, and systematic collection of states for Anabaptist denominations. The authors used a number of statistical analyses to determine that violent ideology may be learned independently from most other characteristics of an overall belief system, and/or may be determined more by congregationally inherited economic and political factors than by theology (Matthews, 2013). The data was expanded from 49 to 67 leaders with documented ties during its use in “Factors of Religious Violence and Path to Peace: A Study of the 16th Century Anabaptists,” (McLaughlin, J 2015) to include Anabaptist and Prodestant leaders that were influential during the Protestant Reformation and the Radical Reformation that have documented interactions. Documented interactions between individuals include instances of the actors meeting each other, or were in conversation, but in many cases, the leaders worked together, or went to school together. In other cases, they opposed one another in debates and were at total odds with one another. McLaughlin determines through a variety of statistical methods that the propagation of theology that sanctions the use of violence was limited to a particular group of people with a particular set of beliefs associated with three factors: charismatic leadership, isolation, and apocalypticism, while also being strongly impacted by the theologies of emerging leaders.</p>
+</div>
+<div id="code-book" class="section level1">
+<h1>Code Book</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">edge_class</th>
+<th align="left">is_bimodal</th>
+<th align="left">is_directed</th>
+<th align="left">is_dynamic</th>
+<th align="left">is_weighted</th>
+<th align="left">definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Face-to-Face Meeting</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Ties indicate that the two actors met one another at some point in time or were in conversation with one another. In many cases, the leaders worked together, or went to school together. In other cases, they opposed one another in debates and were at total odds with one another. The importance of looking at ties, regardless of sentiment, is that this data set provides a better understanding as to who had access to different ideas throughout the overall network, and who was isolated.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sociogram" class="section level1">
+<h1>Sociogram</h1>
+<!-- ```{r, out.width='100%', fig.height=9} -->
+<!-- g %>%  -->
+<!--   visNetwork::visIgraph() %>%  -->
+<!--   visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>%  -->
+<!--   visNetwork::visNodes( -->
+<!--     color = list(highlight.border = "black"),  -->
+<!--     shadow = list(enabled = TRUE, size = 5) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visOptions( -->
+<!--     highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE), -->
+<!--     # selectedBy = list( -->
+<!--     #   variable = "group", -->
+<!--     #   style = "font-size: 15px" -->
+<!--     # ), -->
+<!--     nodesIdSelection = list( -->
+<!--       enabled = TRUE, -->
+<!--       style = "font-size: 15px" -->
+<!--     ) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>%  -->
+<!--   visNetwork::visExport(name = proto_net$reference$name) -->
+<!-- ``` -->
+<div id="htmlwidget-1" style="width:720px;height:864px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/publication/anabaptists/index_files/figure-html//widgets/widget_unnamed-chunk-5.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="get-the-data" class="section level1">
+<h1>Get the Data</h1>
+<div id="tables" class="section level2">
+<h2>Tables</h2>
+<div id="nodes" class="section level3">
+<h3>Nodes</h3>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/publication/anabaptists/index_files/figure-html//widgets/widget_unnamed-chunk-6.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="edges" class="section level3">
+<h3>Edges</h3>
+<div id="htmlwidget-3" style="width:100%;height:auto;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/publication/anabaptists/index_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="citation" class="section level1">
+<h1>Citation</h1>
+<p>Matthews LJ, Edmonds J, Wildman WJ, Nunn CL (2013). “Cultural
+inheritance or cultural diffusion of religious violence? A quantitative
+case study of the Radical Reformation.” <em>Religion, Brain &amp; Behavior</em>,
+<em>3</em>(1), 3-15. doi: 10.1080/2153599x.2012.707388 (URL:
+<a href="https://doi.org/10.1080/2153599x.2012.707388" class="uri">https://doi.org/10.1080/2153599x.2012.707388</a>).</p>
+<p>McLaughlin JM (2015). <em>Anabaptist Leadership Network</em>. Master’s thesis,
+Naval Postgraduate School, 1 University Circle, Monterey, CA 93943.</p>
+</div>

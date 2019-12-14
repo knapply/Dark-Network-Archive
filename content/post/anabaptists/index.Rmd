@@ -7,13 +7,17 @@ output:
 featured: true
 editor_options: 
   chunk_output_type: console
+image:
+  caption: 'Image credit: [**Wikimedia Commons**](https://commons.wikimedia.org/wiki/File:Captured_Citizens_Brought_Before_an_Anabaptist_Leader.jpg)'
+  focal_point: ""
+  preview_only: false
 tags: 
 - Anabaptists
 - religious violence
 - charismatic leadership
 - isolation
 - apocalypticism
-summary: "Gang to gang network data obtained from the Montreal Police's central intelligence base and used to reconstruct the organization of drug-distribution operations in Montreal North. The network data was made available by Manchester and it includes organization to organization undirected ties (although th orignial network is directed)."
+summary: "Historically, organized religion has been associated with large-scale cooperative activities- sometimes including the use of violence against groups of religious outsiders.  Originally used in the article, “Cultural inheritance or cultural diffusion of religious violence? A quantitative case study of the Radical Reformation,” (Matthews, Edmons, Wildman, Nunn, 2013), a network of sixteenth-century Anabaptist were created to understand how religious violence diffused through the congregations. Almost half of the congregations represented groups advocating for the use of violence to overthrow established churches and governments toward the ultimate goal of establishing Christian theocracies, with the other half being pacifists.  Actors and their stances on violence in the network were defined and coded based on their appearances within Anabaptist literature, and systematic collection of states for Anabaptist denominations.  The authors used a number of statistical analyses to determine that violent ideology may be learned independently from most other characteristics of an overall belief system, and/or may be determined more by congregationally inherited economic and political factors than by theology (Matthews, 2013). The data was expanded from 49 to 67 leaders with documented ties during its use in  “Factors of Religious Violence and Path to Peace: A Study of the 16th Century Anabaptists,” (McLaughlin, J 2015) to include Anabaptist and Prodestant leaders that were influential during the Protestant Reformation and the Radical Reformation that have documented interactions.  Documented interactions between individuals include instances of the actors meeting each other, or were in conversation, but in many cases, the leaders worked together, or went to school together. In other cases, they opposed one another in debates and were at total odds with one another.  McLaughlin determines through a variety of statistical methods that the propagation of theology that sanctions the use of violence was limited to a particular group of people with a particular set of beliefs associated with three factors: charismatic leadership, isolation, and apocalypticism, while also being strongly impacted by the theologies of emerging leaders. "
 ---
 
 
@@ -28,7 +32,39 @@ options(warn = 2) # FAIL ON ANY WARNINGS
 
 ```{r}
 proto_net <- COREnets::get_data("anabaptists")
-g <- COREnets::core_as_igraph(proto_net)
+# g <- COREnets::core_as_igraph(proto_net)
+
+build_net <- function(edge_table, node_table,
+                      edge_class, directed) {
+  target_edges <- edge_table[
+    edge_table$edge_class == edge_class, 
+  ]
+  
+  target_nodes <- node_table[
+    node_table$name %in% c(target_edges$from, target_edges$to), 
+  ]
+  
+  igraph::graph_from_data_frame(
+    d = target_edges,
+    directed = directed,
+    vertices = target_nodes
+  )
+}
+
+build_nets <- function(proto_net) {
+  templates <- split(proto_net$reference$codebook, 
+                    seq_len(nrow(proto_net$reference$codebook)))
+  names(templates) <- proto_net$reference$codebook$edge_class
+
+  lapply(templates, function(.x) {
+    build_net(edge_table = proto_net$network$edges_table, 
+              node_table = proto_net$network$nodes_table,
+              edge_class = .x$edge_class,
+              directed = .x$is_directed)
+  })
+}
+
+g <- build_nets(proto_net)
 ```
 
 
@@ -55,27 +91,88 @@ knitr::kable(proto_net$reference$codebook)
 # Sociogram
 
 
+<!-- ```{r, out.width='100%', fig.height=9} -->
+<!-- g %>%  -->
+<!--   visNetwork::visIgraph() %>%  -->
+<!--   visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>%  -->
+<!--   visNetwork::visNodes( -->
+<!--     color = list(highlight.border = "black"),  -->
+<!--     shadow = list(enabled = TRUE, size = 5) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visOptions( -->
+<!--     highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE), -->
+<!--     # selectedBy = list( -->
+<!--     #   variable = "group", -->
+<!--     #   style = "font-size: 15px" -->
+<!--     # ), -->
+<!--     nodesIdSelection = list( -->
+<!--       enabled = TRUE, -->
+<!--       style = "font-size: 15px" -->
+<!--     ) -->
+<!--   ) %>%  -->
+<!--   visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>%  -->
+<!--   visNetwork::visExport(name = proto_net$reference$name) -->
+<!-- ``` -->
+
+
 ```{r, out.width='100%', fig.height=9}
-g %>% 
-  visNetwork::visIgraph() %>% 
-  visNetwork::visIgraphLayout(layout = "layout_with_kk", randomSeed = 831) %>% 
-  visNetwork::visNodes(
-    color = list(highlight.border = "black"), 
-    shadow = list(enabled = TRUE, size = 5)
-  ) %>% 
-  visNetwork::visOptions(
-    highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE),
-    # selectedBy = list(
-    #   variable = "group",
-    #   style = "font-size: 15px"
-    # ),
-    nodesIdSelection = list(
-      enabled = TRUE,
-      style = "font-size: 15px"
+build_vis_net <- function(g, title) {
+  dat <- visNetwork::toVisNetworkData(g)
+  
+  visNetwork::visNetwork(nodes = dat$nodes, edges = dat$edges,
+                         main = title,
+                         height = 800,
+                         width = 680) %>% 
+    visNetwork::visIgraphLayout(layout = "layout_with_kk",
+                                randomSeed = 831) %>% 
+    # visNetwork::visIgraphLayout(layout = "layout.norm",
+                                # layoutMatrix = coords) %>% 
+    visNetwork::visNodes(
+      color = list(highlight.border = "black"),
+      shadow = list(enabled = TRUE, size = 5)
+    ) %>%
+    visNetwork::visOptions(
+      highlightNearest = list(enabled = TRUE,
+                              degree = 1,
+                              hover = TRUE),
+      nodesIdSelection = list(
+        enabled = TRUE,
+        style = "font-size: 15px"
+      )
     )
-  ) %>% 
-  visNetwork::visInteraction(navigationButtons = TRUE, keyboard = TRUE) %>% 
-  visNetwork::visExport(name = proto_net$reference$name)
+}
+
+
+# full_g <- igraph::graph_from_data_frame(
+#   d = proto_net$network$edges_table,
+#   vertices = proto_net$network$nodes_table
+# )
+
+# vis_coords <- igraph::layout_with_kk(full_g)
+
+vis_nets <- purrr::imap(g, build_vis_net)
+
+temp_dir <- tempdir(check = TRUE)
+
+for (i in seq_along(vis_nets)) {
+ htmlwidgets::saveWidget(
+   vis_nets[[i]],
+   file = sprintf("%s/Anabaptist Leadership Network%s.html", temp_dir, i)
+  )
+}
+
+vis_paths <- dir(temp_dir, pattern = "Anabaptist Leadership Network\\d+\\.html$",
+                 full.names = TRUE)
+for_slick <- purrr::map_chr(vis_paths, readr::read_file)
+
+unlink(temp_dir, force = TRUE)
+
+slick <- slickR::slickR(for_slick, slideType = "iframe",
+       height = 900, width = 720) +
+  slickR::settings(dots = TRUE, autoplay = TRUE,
+                   lazyLoad = "ondemand")
+
+widgetframe::frameWidget(slick, width = 720)
 ```
 
 
